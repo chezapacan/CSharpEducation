@@ -44,13 +44,12 @@ public class TicTacToe
 
       endGameFlag = CheckGameEnd(cellIndex);
       if (endGameFlag == 1)
-        Console.WriteLine($"{mark} победили, рестарт через 3 секунды");
+        Console.WriteLine($"{mark} победили");
       if (endGameFlag == -1)
-        Console.WriteLine("Ничья, рестарт через 3 секунды");
+        Console.WriteLine("Ничья");
     }
 
-    Thread.Sleep(3000);
-    StartGame();
+    return;
   }
 
   /// <summary>
