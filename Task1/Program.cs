@@ -1,4 +1,4 @@
-﻿namespace Task1;
+﻿namespace CSharpEducation.Task1;
 class Program
 {
   static void Main()
