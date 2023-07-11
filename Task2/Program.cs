@@ -1,8 +1,10 @@
-﻿using System.Formats.Asn1;
+﻿namespace CSharpEducation.Task2;
 
-namespace CSharpEducation.Task2;
 class Program
 {
+  /// <summary>
+  /// Точка входа программы.
+  /// </summary>
   static void Main()
   {
     var Game = new TicTacToe();
@@ -13,6 +15,10 @@ class Program
     }
   }
 
+  /// <summary>
+  /// Начало новой игры.
+  /// </summary>
+  /// <returns>true, если нажата кнопка "Enter", иначе false.</returns>
   static bool NewGame()
   {
     Console.Write("Если хотите начать новую игру нажмите Enter");
