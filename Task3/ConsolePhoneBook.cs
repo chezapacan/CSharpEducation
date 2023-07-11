@@ -20,19 +20,19 @@ public static class ConsolePhoneBook
     for (int i = 0; i < abonents.Count; i++)
       Console.WriteLine($"{i + 1}. {abonents[i].Phone} - {abonents[i].Name}");
 
-    int choosenOption = ChooseOption(abonents.Count);
+    int chosenOption = ChooseOption(abonents.Count);
 
     Console.Clear();
 
-    Abonent choosenAbonent = null;
-    if (choosenOption > 0)
+    Abonent chosenAbonent = null;
+    if (chosenOption > 0)
     {
-      choosenAbonent = abonents[choosenOption - 1];
-      Console.WriteLine($"{choosenAbonent.Phone} - {choosenAbonent.Name}");
+      chosenAbonent = abonents[chosenOption - 1];
+      Console.WriteLine($"{chosenAbonent.Phone} - {chosenAbonent.Name}");
     }
 
     // В зависимости от выбора "Меню" (choosenOption = 0) или "Абонента" (choosenOption > 0) меняются допустимые опции.
-    var options = choosenOption == 0
+    var options = chosenOption == 0
     ? new Dictionary<string, Action<PhoneBook>>()
     {
       {"Добавить нового абонента", AddAbonent},
@@ -42,9 +42,9 @@ public static class ConsolePhoneBook
     }
     : new Dictionary<string, Action<PhoneBook>>()
     {
-      {"Удалить абонента из телефонной книги", RemoveAbonent(choosenAbonent.Phone)},
-      {"Изменить имя абонента", ChangeAbonentName(choosenAbonent.Phone)},
-      {"Изменить телефонный номер абонента", ChangeAbonentPhoneNumber(choosenAbonent.Phone)},
+      {"Удалить абонента из телефонной книги", RemoveAbonent(chosenAbonent.Phone)},
+      {"Изменить имя абонента", ChangeAbonentName(chosenAbonent.Phone)},
+      {"Изменить телефонный номер абонента", ChangeAbonentPhoneNumber(chosenAbonent.Phone)},
     };
 
     GetOptions(options, phoneBook);
