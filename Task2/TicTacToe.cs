@@ -5,10 +5,23 @@
 /// </summary>
 public class TicTacToe
 {
+  #region Константы
+
+  private const string FirstPlayerMark = "X";
+  private const string SecondPlayerMark = "O";
+
+  #endregion
+
+  #region Поля
+
   /// <summary>
   /// Игровое поле.
   /// </summary>
   private string[,] field;
+
+  #endregion
+
+  #region Методы
 
   /// <summary>
   /// Старт игры.
@@ -19,15 +32,15 @@ public class TicTacToe
     string cell;
     string mark;
     (int, int) cellIndex;
-    bool isXTurn = true;
+    bool isFirstPlayerTurn = true;
 
     Console.Clear();
-    this.field = new string[3, 3] { { "1", "2", "3" }, { "4", "5", "6" }, { "7", "8", "9" } };
+    this.field = CreateEmptyField();
     DrawField();
 
     while (endGameFlag == 0)
     {
-      mark = isXTurn ? "X" : "O";
+      mark = isFirstPlayerTurn ? FirstPlayerMark : SecondPlayerMark;
       Console.Write($"Ход {mark}: ");
       cell = Console.ReadLine();
       cellIndex = FindIndex(cell);
@@ -40,7 +53,7 @@ public class TicTacToe
 
       this.field[cellIndex.Item1, cellIndex.Item2] = mark;
       DrawField();
-      isXTurn = !isXTurn;
+      isFirstPlayerTurn = !isFirstPlayerTurn;
 
       endGameFlag = CheckGameEnd(cellIndex);
       if (endGameFlag == 1)
@@ -50,6 +63,15 @@ public class TicTacToe
     }
 
     return;
+  }
+
+  /// <summary>
+  /// Создание чистого игрового поля.
+  /// </summary>
+  /// <returns>Пустое игровое поле.</returns>
+  private static string[,] CreateEmptyField()
+  {
+    return new string[3, 3] { { "1", "2", "3" }, { "4", "5", "6" }, { "7", "8", "9" } };
   }
 
   /// <summary>
@@ -108,14 +130,13 @@ public class TicTacToe
     int row = cellIndex.Item1;
     int column = cellIndex.Item2;
 
-    if (this.field[row, 0] == this.field[row, 1] && this.field[row, 1] == this.field[row, 2])
+    if ((this.field[row, 0] == this.field[row, 1] && this.field[row, 1] == this.field[row, 2]) ||
+      (this.field[0, column] == this.field[1, column] && this.field[1, column] == this.field[2, column]) ||
+      (this.field[0, 0] == this.field[1, 1] && this.field[1, 1] == this.field[2, 2]) ||
+      (this.field[0, 2] == this.field[1, 1] && this.field[1, 1] == this.field[2, 0]))
+    {
       return 1;
-    if (this.field[0, column] == this.field[1, column] && this.field[1, column] == this.field[2, column])
-      return 1;
-    if (this.field[0, 0] == this.field[1, 1] && this.field[1, 1] == this.field[2, 2])
-      return 1;
-    if (this.field[0, 2] == this.field[1, 1] && this.field[1, 1] == this.field[2, 0])
-      return 1;
+    }
 
     for (int i = 0; i < 3; i++)
     {
@@ -130,4 +151,15 @@ public class TicTacToe
 
     return -1;
   }
+
+  #endregion
+
+  #region Конструктор
+
+  public TicTacToe()
+  {
+    this.field = CreateEmptyField();
+  }
+
+  #endregion
 }

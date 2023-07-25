@@ -5,10 +5,7 @@
 /// </summary>
 public class PhoneBook
 {
-  /// <summary>
-  /// Список абонентов.
-  /// </summary>
-  private List<Abonent> abonents;
+  #region Поля и свойства
 
   /// <summary>
   /// Телефонная книга.
@@ -16,9 +13,9 @@ public class PhoneBook
   private static PhoneBook instance = null;
 
   /// <summary>
-  /// Получение списка абонентов.
+  /// Cписок абонентов.
   /// </summary>
-  public List<Abonent> Abonents { get => abonents; }
+  public List<Abonent> Abonents { get; private set; }
 
   /// <summary>
   /// Получение телефонной книги.
@@ -32,24 +29,9 @@ public class PhoneBook
     }
   }
 
-  /// <summary>
-  /// Инициализация телефонной книги.
-  /// </summary>
-  private PhoneBook()
-  {
-    var reader = new StreamReader("phonebook.txt");
-    this.abonents = new List<Abonent>();
-    string textLine;
-    string[] splitedLine;
+  #endregion
 
-    while ((textLine = reader.ReadLine()) != null)
-    {
-      splitedLine = textLine.Split(':');
-      this.abonents.Add(new Abonent() { Phone = splitedLine.First(), Name = splitedLine.Last() });
-    }
-
-    reader.Close();
-  }
+  #region Методы
 
   /// <summary>
   /// Добавление нового абонента с уникальным номером.
@@ -58,11 +40,11 @@ public class PhoneBook
   /// <returns>true, если новый абонент с уникальным номером добавлен, иначе false.</returns>
   public bool Add(Abonent abonent)
   {
-    bool alreadyExists = this.abonents.Exists(elem => elem.Phone == abonent.Phone);
+    bool alreadyExists = this.Abonents.Exists(elem => elem.Phone == abonent.Phone);
 
     if (!alreadyExists)
     {
-      this.abonents.Add(abonent);
+      this.Abonents.Add(abonent);
       return true;
     }
 
@@ -76,11 +58,11 @@ public class PhoneBook
   /// <returns>true, если абонент с заданным номером удален, иначе false.</returns>
   public bool Remove(string phone)
   {
-    Abonent abonent = this.abonents.Find(elem => elem.Phone == phone);
+    Abonent abonent = this.Abonents.Find(elem => elem.Phone == phone);
 
     if (abonent != null)
     {
-      this.abonents.Remove(abonent);
+      this.Abonents.Remove(abonent);
       return true;
     }
 
@@ -95,7 +77,7 @@ public class PhoneBook
   /// <returns>true, если имя существующего абонента изменено, иначе false.</returns>
   public bool UpdateName(string phone, string newName)
   {
-    Abonent abonent = this.abonents.Find(elem => elem.Phone == phone);
+    Abonent abonent = this.Abonents.Find(elem => elem.Phone == phone);
 
     if (abonent != null)
     {
@@ -114,8 +96,8 @@ public class PhoneBook
   /// <returns>true, если телефонный номер существующего абонента изменен, иначе false.</returns>
   public bool UpdatePhone(string phone, string newPhone)
   {
-    Abonent abonent = this.abonents.Find(elem => elem.Phone == phone);
-    bool alreadyExists = this.abonents.Exists(elem => elem.Phone == newPhone);
+    Abonent abonent = this.Abonents.Find(elem => elem.Phone == phone);
+    bool alreadyExists = this.Abonents.Exists(elem => elem.Phone == newPhone);
 
     if (abonent != null && !alreadyExists && newPhone != string.Empty)
     {
@@ -133,7 +115,7 @@ public class PhoneBook
   /// <returns>Абонент.</returns>
   public Abonent GetAbonent(string phone)
   {
-    return this.abonents.Find(elem => elem.Phone == phone);
+    return this.Abonents.Find(elem => elem.Phone == phone);
   }
 
   /// <summary>
@@ -143,7 +125,7 @@ public class PhoneBook
   /// <returns>Телефонные номера.</returns>
   public string[] GetPhoneNumbers(string name)
   {
-    string[] phoneNumbers = this.abonents.FindAll(elem => elem.Name == name).Select(elem => elem.Phone).ToArray();
+    string[] phoneNumbers = this.Abonents.FindAll(elem => elem.Name == name).Select(elem => elem.Phone).ToArray();
 
     return phoneNumbers;
   }
@@ -153,11 +135,54 @@ public class PhoneBook
   /// </summary>
   public void WriteInFile()
   {
-    var writer = new StreamWriter("phonebook.txt");
-    foreach (Abonent abonent in this.abonents)
+    var writer = new StreamWriter(FilePath.PhoneBookPath);
+    foreach (Abonent abonent in this.Abonents)
     {
       writer.WriteLine($"{abonent.Phone}:{abonent.Name}");
     }
     writer.Close();
   }
+
+  /// <summary>
+  /// Запись всех абонентов из файла.
+  /// </summary>
+  private void ReadFromFile()
+  {
+    if (!File.Exists(FilePath.PhoneBookPath)) return;
+
+    var reader = new StreamReader(FilePath.PhoneBookPath);
+    string textLine;
+    string[] splitedLine;
+
+    while ((textLine = reader.ReadLine()) != null)
+    {
+      splitedLine = textLine.Split(':');
+      this.Abonents.Add(new Abonent() { Phone = splitedLine.First(), Name = splitedLine.Last() });
+    }
+
+    reader.Close();
+  }
+
+  #endregion
+
+  #region Конструктор
+
+  /// <summary>
+  /// Инициализация телефонной книги.
+  /// </summary>
+  private PhoneBook()
+  {
+    this.Abonents = new List<Abonent>();
+    ReadFromFile();
+  }
+
+  #endregion
+}
+
+/// <summary>
+/// Путь к файлу.
+/// </summary>
+public static class FilePath
+{
+  public const string PhoneBookPath = "phonebook.txt";
 }

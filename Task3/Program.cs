@@ -10,7 +10,7 @@ class Program
     var phoneBook = PhoneBook.Instance;
     while (true)
     {
-      ConsolePhoneBook.PrintPhoneBook(phoneBook);
+      PhoneBookConsoleWorker.PrintPhoneBookMenu(phoneBook);
     }
   }
 }

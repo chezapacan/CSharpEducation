@@ -9,7 +9,7 @@ class Program
   {
     var Game = new TicTacToe();
 
-    while (NewGame())
+    while (NewGameStarted())
     {
       Game.StartGame();
     }
@@ -19,7 +19,7 @@ class Program
   /// Начало новой игры.
   /// </summary>
   /// <returns>true, если нажата кнопка "Enter", иначе false.</returns>
-  static bool NewGame()
+  static bool NewGameStarted()
   {
     Console.Write("Если хотите начать новую игру нажмите Enter");
     var key = Console.ReadKey();

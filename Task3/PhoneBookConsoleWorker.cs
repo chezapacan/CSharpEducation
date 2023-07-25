@@ -3,14 +3,13 @@
 /// <summary>
 /// Работа с телефонной книгой в консоли.
 /// </summary>
-public static class ConsolePhoneBook
+public static class PhoneBookConsoleWorker
 {
-
   /// <summary>
   /// Отрисовка телефонной книги в консоли.
   /// </summary>
   /// <param name="phoneBook">Телефонная книга.</param>
-  public static void PrintPhoneBook(PhoneBook phoneBook)
+  public static void PrintPhoneBookMenu(PhoneBook phoneBook)
   {
     List<Abonent> abonents = phoneBook.Abonents;
 
