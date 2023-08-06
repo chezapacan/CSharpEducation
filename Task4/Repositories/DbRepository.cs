@@ -23,25 +23,25 @@ public class DbRepository<T> : IRepository<T> where T : DbEntity
   /// <inheritdoc />
   public T GetById(Guid id)
   {
-    return dbSet.Single(entity => entity.Id == id);
+    return this.dbSet.Single(entity => entity.Id == id);
   }
 
   /// <inheritdoc />
   public IEnumerable<T> GetAll()
   {
-    return dbSet;
+    return this.dbSet;
   }
 
   /// <inheritdoc />
   public void Insert(T entity)
   {
-    dbSet.Add(entity);
+    this.dbSet.Add(entity);
   }
 
   /// <inheritdoc />
   public void Delete(T entity)
   {
-    dbSet.Remove(entity);
+    this.dbSet.Remove(entity);
   }
 
   /// <summary>
@@ -50,7 +50,7 @@ public class DbRepository<T> : IRepository<T> where T : DbEntity
   /// <param name="entity">Сущность.</param>
   public void Update(T entity)
   {
-    dbSet.Entry(entity).State = EntityState.Modified;
+    this.dbSet.Entry(entity).State = EntityState.Modified;
   }
 
   #endregion
