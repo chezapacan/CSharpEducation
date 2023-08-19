@@ -1,7 +1,7 @@
 ﻿namespace CSharpEducation.Task4.Entities;
 
 /// <summary>
-/// Сущность "файл".
+/// Сущность для работы с файлами.
 /// </summary>
 public class FileEntity : IEntity
 {
@@ -14,7 +14,7 @@ public class FileEntity : IEntity
   public FileInfo FileInfo { get; }
 
   /// <summary>
-  /// Инийиализация сущности.
+  /// Инициализация сущности.
   /// </summary>
   /// <param name="fileInfo">Информация о файле.</param>
   public FileEntity(FileInfo fileInfo)

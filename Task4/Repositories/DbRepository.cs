@@ -60,7 +60,7 @@ public class DbRepository<T> : IRepository<T> where T : DbEntity
   /// <summary>
   /// Инициализация репозитория.
   /// </summary>
-  /// <param name="entityList">Коллекция сущностей.</param>
+  /// <param name="dbSet">Коллекция сущностей.</param>
   public DbRepository(DbSet<T> dbSet)
   {
     this.dbSet = dbSet;

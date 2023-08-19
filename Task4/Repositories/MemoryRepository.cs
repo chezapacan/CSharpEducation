@@ -6,7 +6,7 @@ namespace CSharpEducation.Task4.Repositories;
 /// Репозиторий для работы в памяти.
 /// </summary>
 /// <typeparam name="T">Сущность.</typeparam>
-public class MemoryRepository<T> : IRepository<T> where T : IEntity
+public class MemoryRepository<T> : IRepository<T> where T : MemoryEntity
 {
   #region Поля и свойства
 
