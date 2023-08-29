@@ -69,7 +69,7 @@ public class FileRepository : IRepository<FileEntity>
   #region Конструктор
 
   /// <summary>
-  /// Инициализация репозитория.
+  /// Конструктор.
   /// </summary>
   /// <param name="path">Путь к директории.</param>
   public FileRepository(string path)

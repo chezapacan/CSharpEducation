@@ -9,7 +9,7 @@ public class MemoryEntity : IEntity
   public Guid Id { get; }
 
   /// <summary>
-  /// Инициализация сущности.
+  /// Конструктор.
   /// </summary>
   public MemoryEntity()
   {

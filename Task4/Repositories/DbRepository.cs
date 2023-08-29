@@ -58,7 +58,7 @@ public class DbRepository<T> : IRepository<T> where T : DbEntity
   #region Конструктор
 
   /// <summary>
-  /// Инициализация репозитория.
+  /// Конструктор.
   /// </summary>
   /// <param name="dbSet">Коллекция сущностей.</param>
   public DbRepository(DbSet<T> dbSet)

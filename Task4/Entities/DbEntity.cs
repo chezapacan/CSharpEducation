@@ -9,7 +9,7 @@ public class DbEntity : IEntity
   public Guid Id { get; }
 
   /// <summary>
-  /// Инициализация сущности.
+  /// Конструктор.
   /// </summary>
   public DbEntity()
   {

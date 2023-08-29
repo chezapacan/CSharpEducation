@@ -14,7 +14,7 @@ public class FileEntity : IEntity
   public FileInfo FileInfo { get; }
 
   /// <summary>
-  /// Инициализация сущности.
+  /// Конструктор.
   /// </summary>
   /// <param name="fileInfo">Информация о файле.</param>
   public FileEntity(FileInfo fileInfo)

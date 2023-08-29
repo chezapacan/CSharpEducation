@@ -48,7 +48,7 @@ public class MemoryRepository<T> : IRepository<T> where T : MemoryEntity
   #region Контструктор
 
   /// <summary>
-  /// Инициализация репозитория.
+  /// Конструктор.
   /// </summary>
   /// <param name="entityList">Коллекция сущностей.</param>
   public MemoryRepository(ICollection<T> entityList)
